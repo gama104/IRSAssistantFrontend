@@ -86,11 +86,13 @@ const EnhancedChatInterface: React.FC = () => {
 
     try {
       // Call the real API
-      const data = await apiService.processQuery(userMessage, selectedTaxpayer.id);
+      const data = await apiService.processQuery(
+        userMessage,
+        selectedTaxpayer.id
+      );
       addMessage({
         content:
-          data.response ||
-          "I couldn't process your request. Please try again.",
+          data.response || "I couldn't process your request. Please try again.",
         role: "assistant",
         sqlQuery: data.sqlQuery,
         confidence: data.confidence,
