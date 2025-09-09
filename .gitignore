@@ -1,0 +1,33 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+
+# .NET
+*.dll
+*.exe
+*.pdb
+*.cache
+*.tmp
+
+# Azure
+publish/
+*.zip
+
+# Environment files
+appsettings.Development.json
+appsettings.Local.json
+*.env
+
+# Database
+*.mdf
+*.ldf
+
+# Logs
+logs/
+*.log
+node_modules
