@@ -29,6 +29,26 @@ export interface ChatSession {
   updatedAt: Date;
 }
 
+export interface Taxpayer {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber?: string;
+  createdAt: string;
+  lastLoginAt?: string;
+}
+
+export interface QueryResponse {
+  response: string;
+  sqlQuery?: string;
+  data?: any[];
+  confidence?: number;
+  executionTimeMs?: number;
+  errorMessage?: string;
+  timestamp: string;
+}
+
 export interface AppState {
   documents: IRSDocument[];
   currentSession: ChatSession | null;

@@ -1,4 +1,5 @@
 import { azureConfig } from '@/config/azureConfig';
+import { Taxpayer, QueryResponse } from '@/types';
 
 const API_BASE_URL = azureConfig.apiUrl;
 
@@ -30,13 +31,13 @@ class ApiService {
   }
 
   // Taxpayers API
-  async getTaxpayers() {
-    return this.request('/api/v1/taxpayers');
+  async getTaxpayers(): Promise<Taxpayer[]> {
+    return this.request<Taxpayer[]>('/api/v1/taxpayers');
   }
 
   // Chat API
-  async processQuery(query: string, taxpayerId?: string, sessionId?: string) {
-    return this.request('/api/v1/chat/process-query', {
+  async processQuery(query: string, taxpayerId?: string, sessionId?: string): Promise<QueryResponse> {
+    return this.request<QueryResponse>('/api/v1/chat/process-query', {
       method: 'POST',
       body: JSON.stringify({
         query,
