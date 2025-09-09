@@ -35,12 +35,13 @@ class ApiService {
   }
 
   // Chat API
-  async processQuery(query: string, taxpayerId?: string) {
+  async processQuery(query: string, taxpayerId?: string, sessionId?: string) {
     return this.request('/api/v1/chat/process-query', {
       method: 'POST',
       body: JSON.stringify({
         query,
         taxpayerId,
+        sessionId: sessionId || 'default',
       }),
     });
   }

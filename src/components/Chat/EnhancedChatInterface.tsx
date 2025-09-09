@@ -88,7 +88,8 @@ const EnhancedChatInterface: React.FC = () => {
       // Call the real API
       const data = await apiService.processQuery(
         userMessage,
-        selectedTaxpayer.id
+        selectedTaxpayer.id,
+        currentSession?.id
       );
       addMessage({
         content:
