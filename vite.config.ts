@@ -4,7 +4,11 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react({
+      jsxRuntime: 'automatic',
+    })
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -19,6 +23,9 @@ export default defineConfig({
         manualChunks: undefined,
       },
     },
+  },
+  esbuild: {
+    jsx: 'automatic',
   },
   server: {
     proxy: {
