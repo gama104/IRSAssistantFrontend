@@ -110,7 +110,7 @@ const EnhancedChatInterface: React.FC = () => {
     createSession(`Chat ${sessions.length + 1}`);
   };
 
-  // Sample prompts for demo
+  // Sample prompts for demo - Updated to match actual database capabilities
   const samplePrompts = [
     {
       category: "💰 Income Analysis",
@@ -127,7 +127,7 @@ const EnhancedChatInterface: React.FC = () => {
         "What properties do I own and their current values?",
         "Show me my assets and their current values",
         "What's my debt-to-asset ratio?",
-        "How much rental income do I earn?",
+        "Show me my rental properties and their income",
       ],
     },
     {
@@ -142,10 +142,10 @@ const EnhancedChatInterface: React.FC = () => {
     {
       category: "📈 Trends & Planning",
       prompts: [
-        "How has my net worth changed over the past 5 years?",
         "What's my retirement readiness?",
         "Show me my income growth pattern",
-        "If I sold my rental property, how would it affect my taxes?",
+        "What's my total asset portfolio value?",
+        "How much equity do I have in my properties?",
       ],
     },
   ];
