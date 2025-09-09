@@ -14,7 +14,7 @@ const Header: React.FC = () => {
           </div>
           <div>
             <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-              IRS Assistant
+              Taxes Assistant
             </h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">
               AI-powered tax document analysis

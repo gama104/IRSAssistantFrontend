@@ -1,4 +1,4 @@
-# IRS Assistant
+# Taxes Assistant
 
 An AI-powered React application for analyzing IRS tax documents and answering questions about your tax information.
 
