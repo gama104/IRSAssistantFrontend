@@ -34,7 +34,8 @@ const EnhancedChatInterface: React.FC = () => {
   // Ensure sample prompts are hidden on mobile by default
   useEffect(() => {
     const checkScreenSize = () => {
-      if (window.innerWidth < 640) { // sm breakpoint
+      if (window.innerWidth < 640) {
+        // sm breakpoint
         setShowSamplePrompts(false);
       }
     };
@@ -43,9 +44,9 @@ const EnhancedChatInterface: React.FC = () => {
     checkScreenSize();
 
     // Check on resize
-    window.addEventListener('resize', checkScreenSize);
-    
-    return () => window.removeEventListener('resize', checkScreenSize);
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
   const fetchTaxpayers = async () => {
@@ -345,27 +346,27 @@ const EnhancedChatInterface: React.FC = () => {
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-2 sm:p-4 space-y-3 sm:space-y-4">
-        {currentSession.messages.length === 0 ? (
-          <div className="text-center py-6 sm:py-8">
-            <Bot className="h-10 w-10 sm:h-12 sm:w-12 text-gray-400 dark:text-gray-500 mx-auto mb-3 sm:mb-4" />
-            <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base px-4">
-              Ask me anything about{" "}
-              {selectedTaxpayer ? `${selectedTaxpayer.firstName}'s` : "your"}{" "}
-              tax data!
-            </p>
-            <p className="text-xs sm:text-sm text-gray-400 dark:text-gray-500 mt-2 px-4">
-              Try: "What was my total income last year?"
-            </p>
-            {!showSamplePrompts && (
-              <button
-                onClick={() => setShowSamplePrompts(true)}
-                className="mt-4 inline-flex items-center px-4 py-2 text-sm font-medium text-primary-600 bg-primary-50 dark:bg-primary-900/20 dark:text-primary-400 border border-primary-200 dark:border-primary-800 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors"
-              >
-                <Lightbulb className="h-4 w-4 mr-2" />
-                Browse Sample Questions
-              </button>
-            )}
-          </div>
+          {currentSession.messages.length === 0 ? (
+            <div className="text-center py-6 sm:py-8">
+              <Bot className="h-10 w-10 sm:h-12 sm:w-12 text-gray-400 dark:text-gray-500 mx-auto mb-3 sm:mb-4" />
+              <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base px-4">
+                Ask me anything about{" "}
+                {selectedTaxpayer ? `${selectedTaxpayer.firstName}'s` : "your"}{" "}
+                tax data!
+              </p>
+              <p className="text-xs sm:text-sm text-gray-400 dark:text-gray-500 mt-2 px-4">
+                Try: "What was my total income last year?"
+              </p>
+              {!showSamplePrompts && (
+                <button
+                  onClick={() => setShowSamplePrompts(true)}
+                  className="mt-4 inline-flex items-center px-4 py-2 text-sm font-medium text-primary-600 bg-primary-50 dark:bg-primary-900/20 dark:text-primary-400 border border-primary-200 dark:border-primary-800 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors"
+                >
+                  <Lightbulb className="h-4 w-4 mr-2" />
+                  Browse Sample Questions
+                </button>
+              )}
+            </div>
           ) : (
             currentSession.messages.map((message) => (
               <div
