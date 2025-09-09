@@ -10,6 +10,7 @@ import {
   Cloud,
 } from "lucide-react";
 import ErrorModal from "./ErrorModal";
+import { apiService } from "@/services/api";
 
 interface ServiceStatus {
   name: string;
@@ -38,15 +39,8 @@ const ServiceStatusComponent: React.FC = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch("/api/v1/status");
-
-      // Handle both 200 (Healthy) and 503 (Critical) responses
-      if (response.status === 200 || response.status === 503) {
-        const data = await response.json();
-        setStatus(data);
-      } else {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      const data = await apiService.getStatus();
+      setStatus(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to fetch status");
       console.error("Error fetching status:", err);

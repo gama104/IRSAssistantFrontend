@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { cn } from "@/utils/cn";
+import { apiService } from "@/services/api";
 
 interface Taxpayer {
   id: string;
@@ -46,25 +47,12 @@ const EnhancedChatInterface: React.FC = () => {
   const fetchTaxpayers = async () => {
     setIsLoadingTaxpayers(true);
     try {
-      console.log("Fetching taxpayers from /api/v1/taxpayers");
-      const response = await fetch("/api/v1/taxpayers");
-      console.log("Response status:", response.status);
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Taxpayers data:", data);
-        setTaxpayers(data);
-        if (data.length > 0) {
-          setSelectedTaxpayer(data[0]); // Select first taxpayer by default
-        }
-      } else {
-        console.error(
-          "Failed to fetch taxpayers:",
-          response.status,
-          response.statusText
-        );
-        const errorText = await response.text();
-        console.error("Error response:", errorText);
+      console.log("Fetching taxpayers from API service");
+      const data = await apiService.getTaxpayers();
+      console.log("Taxpayers data:", data);
+      setTaxpayers(data);
+      if (data.length > 0) {
+        setSelectedTaxpayer(data[0]); // Select first taxpayer by default
       }
     } catch (error) {
       console.error("Error fetching taxpayers:", error);
@@ -98,32 +86,16 @@ const EnhancedChatInterface: React.FC = () => {
 
     try {
       // Call the real API
-      const response = await fetch("/api/v1/chat/process-query", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          query: userMessage,
-          sessionId: currentSession?.id || "default",
-          taxpayerId: selectedTaxpayer.id,
-        }),
+      const data = await apiService.processQuery(userMessage, selectedTaxpayer.id);
+      addMessage({
+        content:
+          data.response ||
+          "I couldn't process your request. Please try again.",
+        role: "assistant",
+        sqlQuery: data.sqlQuery,
+        confidence: data.confidence,
+        executionTime: data.executionTimeMs,
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        addMessage({
-          content:
-            data.response ||
-            "I couldn't process your request. Please try again.",
-          role: "assistant",
-          sqlQuery: data.sqlQuery,
-          confidence: data.confidence,
-          executionTime: data.executionTimeMs,
-        });
-      } else {
-        throw new Error("API request failed");
-      }
     } catch (error) {
       console.error("Error calling API:", error);
       addMessage({
